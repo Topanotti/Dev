@@ -1,0 +1,24 @@
+{% extends "navbar.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+</br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">Adicionar Veículo</h3>
+            <form method="POST">
+                {% csrf_token %}
+                {% crispy form %}
+            </form>
+        </br>
+            <div class="row">
+                <div class="col-10 offset-1 d-flex justify-content-between align-items-center">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a href="{% url 'index_veiculo' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+             </div> 
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

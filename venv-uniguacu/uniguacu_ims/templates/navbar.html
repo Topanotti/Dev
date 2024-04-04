@@ -1,0 +1,53 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Uniguaçu-IMS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index_fornecedor' %}"><i class="fa-solid fa-u"></i> Uniguaçu-IMS:</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dashboard' %}"><i class="fa-solid fa-house"></i> Início</a>
+                    </li>   
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index_fornecedor' %}"><i class="fa-solid fa-store"></i> Fornecedor:</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index_item' %}"><i class="fa-solid fa-warehouse"></i> Iventário</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index_requisicao' %}"><i class="fa-solid fa-file-contract"></i> Requisições</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index_compra' %}"><i class="fa-solid fa-cart-shopping"></i> Compras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index_veiculo' %}"><i class="fa-solid fa-car"></i> Veículos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-calendar-check"></i> Reservas</a>
+                    </li>
+                </ul>
+                <form class="d-flex" action="{% url 'search' %}" method="GET">
+                    <input class="form-control me-sm-2" type="search" placeholder="Buscar por..." aria-label="Search" name="query">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</body>    
+{% block body %}
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "navbar.html" %}
+{% block body %}
+</br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">Adicionar Item</h3>
+            {% if success %}
+                <div class="alert alert-sucess" role="alert">
+                    Item Adicionado Com Sucesso!
+                    <a href="{% url 'index_item' %}" class="alert-link">Voltar para página inicial</a>
+                </div>
+            {% else %}   
+            <form action="{% url 'add_item' %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome:</label>
+                    <input type="text" class="form-control" id="nome" name="nome">
+                </div>
+                <div class="mb-3">
+                    <label for="codigo" class="form-label">Código:</label>
+                    <input type="text" class="form-control" id="codigo" name="codigo">
+                </div>                
+                <div class="mb-3">
+                    <label for="preco" class="form-label">Preço:</label>
+                    <input type="text" class="form-control" id="preco" name="preco">
+                </div>
+                <div class="mb-3">
+                    <label for="quantidade" class="form-label">Quantidade:</label>
+                    <input type="text" class="form-control" id="quantidade" name="quantidade">
+                </div>
+                <div class="mb-3">
+                    <label for="data_compra" class="form-label">Data da Compra:</label>
+                    <input type="text" class="form-control" id="data_compra" name="data_compra">
+                </div>
+                <div class="mb-3">
+                    <label for="fornecedor" class="form-label">Fornecedor:</label>
+                    <select class="form-control" id="fornecedor" name="fornecedor">
+                        {% for fornecedor in fornecedores %}
+                            <option value="{{ fornecedor.id }}">{{ fornecedor.nome }} - {{ fornecedor.cnpj }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="requisicao" class="form-label">Requisição:</label>
+                    <select class="form-control" id="requisicao" name="requisicao">
+                        {% for requisicao in requisicoes %}
+                            <option value="{{ requisicao.id }}">{{ requisicao.numero }} - {{ requisicao.data }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="descricao" name="descricao"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{% url 'index_item' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    {% endif %}
+    </div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

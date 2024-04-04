@@ -1,0 +1,43 @@
+{% extends "navbar.html" %}
+
+{% block body %}
+<div class="container">
+    <br>
+    <h3 class="text-center mb-4"> Detalhes do Item: {{ item.nome }}</h3>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" value="{{ item.nome }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="preco" class="form-label">Preço</label>
+                <input type="text" class="form-control" id="preco" name="preco" value="{{ item.preco }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="quantidade" class="form-label">Quantidade</label>
+                <input type="text" class="form-control" id="quantidade" name="quantidade" value="{{ item.quantidade }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="data_compra" class="form-label">Data da Compra</label>
+                <input type="data_compra" class="form-control" id="data_compra" name="data_compra" value="{{ item.data_compra }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="fornecedor" class="form-label">Fornecedor</label>
+                <input type="text" class="form-control" id="fornecedor" name="fornecedor" value="{{ fornecedor_nome }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="requisicao" class="form-label">Requisição</label>
+                <input type="text" class="form-control" id="requisicao" name="requisicao" value="{{ requisicao_numero }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" name="descricao" readonly>{{ item.descricao }}</textarea>
+            </div>
+            <a href="{% url 'index_item' %}" class="btn btn-secondary">Voltar</a>
+            <a href="{% url 'delete_item' item.id %}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar o item: {{ item.nome }} ?')">Deletar</a>
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

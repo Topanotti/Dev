@@ -1,0 +1,66 @@
+{% extends "navbar.html" %}
+{% block body %}
+</br>
+<h3 class="m-4 text-center">Compras:</h3>
+</br>
+<div class="row">
+    <div class="col-10 offset-1 d-flex justify-content-between align-items-center">
+        <a href="{% url 'add_compra' %}" class="btn btn-primary mb-3 me-3"><i class="fa-solid fa-plus"></i> Adicionar Compra</a>
+        <form method="GET" action="{% url 'add_compra' %}" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Procurar comprass..." name="query" value="{{ query }}">
+                <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-10 offset-1">
+    </br>
+        {% if query %}
+        <div class="alert alert-info mb-3">
+            Aqui estão os resultados para a busca "{{ query }}". 
+            <a href="{% url 'index_compra' %}" class="btn btn-secondary btn-sm ms-2">Limpar busca</a>
+        </div>
+        {% endif %}
+        {% if compras %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Número</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for compra in compras %}
+                    <tr>
+                        <th scope="row">{{compra.pk}}</th>
+                        <td>{{compra.data|date:"d-m-Y" }}</td>
+                        <td>{{compra.descricao}}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col">
+                                    <a class="nav-link" href="{% url 'view_compra' compra.id %}"><i class="fa-solid fa-eye"></i></a>
+                                </div>
+                                <div class="col">
+                                    <a class="nav-link" href="{% url 'edit_compra' compra.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                </div>
+                                <div class="col">
+                                    <a class="nav-link" href="{% url 'delete_compra' compra.id %}" onclick="return confirm('Tem certeza que deseja deletar esta compra?')"><i class="fa-solid fa-trash"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <h5 class="alert alert-primary ms-4 me-4">Não foi possível carregar os registros de Compras!</h5>
+        {% endif %}
+    </div>
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "navbar.html" %}
+{% block body %}
+</br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">Editar Fornecedor: {{ fornecedor.nome }}</h3>
+            {% if success %}
+                <div class="alert alert-success" role="alert">
+                    Fornecedor Editado Com Sucesso!
+                    <a href="{% url 'index_fornecedor' %}" class="alert-link">Voltar para página inicial</a>
+                </div>
+            {% else %}   
+            <form action="{% url 'edit_fornecedor' fornecedor.id %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" value="{{ fornecedor.nome }}">
+                </div>
+                <div class="mb-3">
+                    <label for="cnpj" class="form-label">CNPJ</label>
+                    <input type="text" class="form-control" id="cnpj" name="cnpj" value="{{ fornecedor.cnpj }}">
+                </div>
+                <div class="mb-3">
+                    <label for="endereco" class="form-label">Endereço</label>
+                    <input type="text" class="form-control" id="endereco" name="endereco" value="{{ fornecedor.endereco }}">
+                </div>
+                <div class="mb-3">
+                    <label for="contato" class="form-label">Contato</label>
+                    <input type="text" class="form-control" id="contato" name="contato" value="{{ fornecedor.contato }}">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ fornecedor.email }}">
+                </div>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="descricao" name="descricao">{{ fornecedor.descricao }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+                <a href="{% url 'index_fornecedor' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    {% endif %}
+    </div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

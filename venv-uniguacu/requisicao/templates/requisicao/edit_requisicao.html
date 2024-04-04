@@ -1,0 +1,40 @@
+{% extends "navbar.html" %}
+{% block body %}
+</br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">Editar Requisição: {{requisicao.numero}}</h3>
+            {% if success %}
+                <div class="alert alert-success" role="alert">
+                    Requisição Editada Com Sucesso!
+                    <a href="{% url 'index_requisicao' %}" class="alert-link">Voltar para página inicial</a>
+                </div>
+            {% else %}
+                <form action="{% url 'edit_requisicao' requisicao.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="numero" class="form-label">Número:</label>
+                        <input type="text" class="form-control" id="numero" name="numero" value="{{ requisicao.numero }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="requerente" class="form-label">Requerente:</label>
+                        <input type="text" class="form-control" id="requerente" name="requerente" value="{{ requisicao.requerente }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data:</label>
+                        <input type="text" class="form-control" id="data" name="data" value="{{ requisicao.data }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição:</label>
+                        <input type="text" class="form-control" id="descricao" name="descricao" value="{{ requisicao.descricao }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Atualizar</button>
+                    <a href="{% url 'index_requisicao' %}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

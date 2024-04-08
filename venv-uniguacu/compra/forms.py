@@ -1,8 +1,7 @@
-# forms.py
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from .models import Compra
+from .models import Compra, Requisicao
 
 class CompraForm(forms.ModelForm):
     class Meta:
@@ -19,9 +18,11 @@ class CompraForm(forms.ModelForm):
         }
         widgets = {
             'data': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'requisicao': forms.Select(attrs={'class': 'form-control'}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['requisicao'].queryset = Requisicao.objects.all().values_list('id', 'numero', 'requerente')
         self.helper = FormHelper()
         self.helper.add_input(Submit('submit', 'Salvar'))
